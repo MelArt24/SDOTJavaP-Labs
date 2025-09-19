@@ -7,13 +7,17 @@ public class Lab2 {
     public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
 
-            System.out.println("Введіть слова через пробіл:");
+            System.out.println("Введіть слова через пробіл (лише літери):");
             StringBuilder inputText = new StringBuilder(scanner.nextLine());
+
+            if (!inputText.toString().matches("[a-zA-Zа-яА-ЯїЇєЄіІґҐ\\s]+")) {
+                throw new IllegalArgumentException("Текст повинен містити лише літери та пробіли!");
+            }
 
             System.out.println("Введіть символ для сортування:");
             String charInput = scanner.nextLine();
-            if (charInput.length() != 1) {
-                throw new IllegalArgumentException("Потрібно ввести лише один символ!");
+            if (charInput.length() != 1 || !charInput.matches("[a-zA-Zа-яА-ЯїЇєЄіІґҐ]")) {
+                throw new IllegalArgumentException("Потрібно ввести лише одну літеру!");
             }
             char targetChar = charInput.charAt(0);
 
@@ -39,7 +43,6 @@ public class Lab2 {
 
         } catch (Exception e) {
             System.err.println("Сталася помилка: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 
