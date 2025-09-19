@@ -1,6 +1,7 @@
 package lab2;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Lab2 {
@@ -21,20 +22,20 @@ public class Lab2 {
             }
             char targetChar = charInput.charAt(0);
 
-            String[] words = inputText.toString().split("\\s+");
+            List<StringBuilder> words = splitIntoWords(inputText);
 
-            Arrays.sort(words, (w1, w2) -> {
-                int count1 = countCharOccurrences(new StringBuilder(w1), targetChar);
-                int count2 = countCharOccurrences(new StringBuilder(w2), targetChar);
+            words.sort((w1, w2) -> {
+                int count1 = countCharOccurrences(w1, targetChar);
+                int count2 = countCharOccurrences(w2, targetChar);
 
                 if (count1 == count2) {
-                    return w1.compareToIgnoreCase(w2);
+                    return compareStringBuilders(w1, w2);
                 }
                 return Integer.compare(count1, count2);
             });
 
             StringBuilder result = new StringBuilder();
-            for (String word : words) {
+            for (StringBuilder word : words) {
                 result.append(word).append(" ");
             }
 
@@ -54,5 +55,41 @@ public class Lab2 {
             }
         }
         return count;
+    }
+
+    private static List<StringBuilder> splitIntoWords(StringBuilder text) {
+        List<StringBuilder> words = new ArrayList<>();
+        StringBuilder current = new StringBuilder();
+
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+            if (Character.isWhitespace(c)) {
+                if (!current.isEmpty()) {
+                    words.add(new StringBuilder(current));
+                    current.setLength(0);
+                }
+            } else {
+                current.append(c);
+            }
+        }
+        if (!current.isEmpty()) {
+            words.add(current);
+        }
+        return words;
+    }
+
+    private static int compareStringBuilders(StringBuilder sb1, StringBuilder sb2) {
+        int len1 = sb1.length();
+        int len2 = sb2.length();
+        int lim = Math.min(len1, len2);
+
+        for (int i = 0; i < lim; i++) {
+            char c1 = sb1.charAt(i);
+            char c2 = sb2.charAt(i);
+            if (c1 != c2) {
+                return c1 - c2;
+            }
+        }
+        return len1 - len2;
     }
 }
