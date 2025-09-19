@@ -3,13 +3,34 @@ package lab3;
 import java.util.Arrays;
 import java.util.Objects;
 
+/**
+ * Клас <code>Car</code> представляє автомобіль з п’ятьма основними характеристиками.
+ * <p>
+ * Цей клас використовується для демонстрації сортування масиву об'єктів <code>Car</code>
+ * за двома критеріями: спочатку за роком випуску за зростанням, потім за ціною за спаданням.
+ * </p>
+ *
+ * @author MelArt24
+ * @version 1.0
+ * @since 2025-09-19
+ */
 class Car {
-    private String brand;
-    private String model;
-    private int year;
-    private double price;
-    private int mileage;
+    // Поля класу
+    private String brand;       /**< Марка автомобіля */
+    private String model;       /**< Модель автомобіля */
+    private int year;           /**< Рік випуску */
+    private double price;       /**< Ціна */
+    private int mileage;        /**< Пробіг в кілометрах */
 
+    /**
+     * Конструктор для ініціалізації об'єкта <code>Car</code> з заданими значеннями.
+     *
+     * @param brand   марка автомобіля
+     * @param model   модель автомобіля
+     * @param year    рік випуску
+     * @param price   ціна
+     * @param mileage пробіг
+     */
     public Car(String brand, String model, int year, double price, int mileage) {
         this.brand = brand;
         this.model = model;
@@ -17,6 +38,8 @@ class Car {
         this.price = price;
         this.mileage = mileage;
     }
+
+    // Геттери та сеттери
 
     public String getBrand() {
         return brand;
@@ -58,6 +81,11 @@ class Car {
         this.mileage = mileage;
     }
 
+    /**
+     * Повертає рядкове представлення цього об'єкта.
+     *
+     * @return рядкове представлення
+     */
     @Override
     public String toString() {
         return "Car{" +
@@ -69,6 +97,12 @@ class Car {
                 '}';
     }
 
+    /**
+     * Порівнює цей об'єкт з іншим.
+     *
+     * @param o об'єкт для порівняння
+     * @return <code>true</code>, якщо об'єкти рівні; <code>false</code> в іншому випадку
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -80,14 +114,31 @@ class Car {
                 Objects.equals(model, car.model);
     }
 
+    /**
+     * Генерує хеш-код для цього об'єкта.
+     *
+     * @return хеш-код
+     */
     @Override
     public int hashCode() {
         return Objects.hash(brand, model, year, price, mileage);
     }
 }
 
+/**
+ * Головний клас програми, що демонструє сортування та пошук об'єктів <code>Car</code>.
+ */
 public class Lab3 {
+    /**
+     * Головний метод програми.
+     * <p>
+     * Створює масив об'єктів <code>Car</code>, сортує їх за двома критеріями та шукає заданий об'єкт.
+     * </p>
+     *
+     * @param args аргументи командного рядка (не використовуються)
+     */
     public static void main(String[] args) {
+        // Створення масиву об'єктів Car
         Car[] cars = {
                 new Car("Toyota", "Corolla", 2018, 15000, 50000),
                 new Car("Honda", "Civic", 2020, 20000, 30000),
@@ -96,20 +147,24 @@ public class Lab3 {
                 new Car("Honda", "Accord", 2018, 25000, 25000)
         };
 
+        // Сортування масиву: спочатку за роком (year) за зростанням,
+        // якщо роки однакові — за ціною (price) за спаданням
         Arrays.sort(cars, (c1, c2) -> {
             int yearCompare = Integer.compare(c1.getYear(), c2.getYear());
             if (yearCompare != 0) {
-                return yearCompare;
+                return yearCompare; // за зростанням року
             } else {
-                return -Double.compare(c1.getPrice(), c2.getPrice());
+                return -Double.compare(c1.getPrice(), c2.getPrice()); // за спаданням ціни
             }
         });
 
+        // Вивід відсортованого масиву
         System.out.println("Відсортований масив автомобілів:");
         for (Car car : cars) {
             System.out.println(car);
         }
 
+        // Пошук конкретного автомобіля (об'єкта) в масиві
         Car searchCar = new Car("Ford", "Focus", 2018, 18000, 40000);
         boolean found = false;
         for (Car car : cars) {
