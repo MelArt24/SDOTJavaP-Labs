@@ -4,10 +4,10 @@ import java.util.Arrays;
 import java.util.Objects;
 
 /**
- * Клас <code>Car</code> представляє автомобіль з п’ятьма основними характеристиками.
+ * The <code>Car</code> class represents a car with five main characteristics.
  * <p>
- * Цей клас використовується для демонстрації сортування масиву об'єктів <code>Car</code>
- * за двома критеріями: спочатку за роком випуску за зростанням, потім за ціною за спаданням.
+ * This class is used to demonstrate sorting an array of <code>Car</code> objects
+ * by two criteria: first by year of release in ascending order, then by price in descending order.
  * </p>
  *
  * @author MelArt24
@@ -16,20 +16,20 @@ import java.util.Objects;
  */
 class Car {
     // Поля класу
-    private String brand;       /**< Марка автомобіля */
-    private String model;       /**< Модель автомобіля */
-    private int year;           /**< Рік випуску */
-    private double price;       /**< Ціна */
-    private int mileage;        /**< Пробіг в кілометрах */
+    private String brand;       /**< Car brand */
+    private String model;       /**< Car model */
+    private int year;           /**< Year of release */
+    private double price;       /**< Price */
+    private int mileage;        /**< Mileage in kilometers */
 
     /**
-     * Конструктор для ініціалізації об'єкта <code>Car</code> з заданими значеннями.
+     * Constructor for initializing a <code>Car</code> object with given values.
      *
-     * @param brand   марка автомобіля
-     * @param model   модель автомобіля
-     * @param year    рік випуску
-     * @param price   ціна
-     * @param mileage пробіг
+     * @param brand   car brand
+     * @param model   car model
+     * @param year    year of manufacture
+     * @param price   price
+     * @param mileage mileage
      */
     public Car(String brand, String model, int year, double price, int mileage) {
         this.brand = brand;
@@ -39,7 +39,7 @@ class Car {
         this.mileage = mileage;
     }
 
-    // Геттери та сеттери
+    // getters and setters
 
     public String getBrand() {
         return brand;
@@ -82,9 +82,9 @@ class Car {
     }
 
     /**
-     * Повертає рядкове представлення цього об'єкта.
+     * Returns a string representation of this object.
      *
-     * @return рядкове представлення
+     * @return a string representation
      */
     @Override
     public String toString() {
@@ -98,10 +98,10 @@ class Car {
     }
 
     /**
-     * Порівнює цей об'єкт з іншим.
+     * Compares this object with another one.
      *
-     * @param o об'єкт для порівняння
-     * @return <code>true</code>, якщо об'єкти рівні; <code>false</code> в іншому випадку
+     * @param o object for comparison
+     * @return <code>true</code>, if the objects are equal; <code>false</code> otherwise
      */
     @Override
     public boolean equals(Object o) {
@@ -115,9 +115,9 @@ class Car {
     }
 
     /**
-     * Генерує хеш-код для цього об'єкта.
+     * Generates a hash code for this object.
      *
-     * @return хеш-код
+     * @return a hash code
      */
     @Override
     public int hashCode() {
@@ -126,19 +126,19 @@ class Car {
 }
 
 /**
- * Головний клас програми, що демонструє сортування та пошук об'єктів <code>Car</code>.
+ * The main class of the program demonstrating sorting and searching for <code>Car</code> objects.
  */
 public class Lab3 {
     /**
-     * Головний метод програми.
+     * The main method of the program.
      * <p>
-     * Створює масив об'єктів <code>Car</code>, сортує їх за двома критеріями та шукає заданий об'єкт.
+     * Creates an array of objects <code>Car</code>, sorts them by two criteria and searches for the specified object.
      * </p>
      *
-     * @param args аргументи командного рядка (не використовуються)
+     * @param args command line arguments (not used)
      */
     public static void main(String[] args) {
-        // Створення масиву об'єктів Car
+        // Creating an array of Car objects
         Car[] cars = {
                 new Car("Toyota", "Corolla", 2018, 15000, 50000),
                 new Car("Honda", "Civic", 2020, 20000, 30000),
@@ -147,35 +147,35 @@ public class Lab3 {
                 new Car("Honda", "Accord", 2018, 25000, 25000)
         };
 
-        // Сортування масиву: спочатку за роком (year) за зростанням,
-        // якщо роки однакові — за ціною (price) за спаданням
+        // Sort the array: first by year in ascending order,
+        // if the years are equal — by price in descending order
         Arrays.sort(cars, (c1, c2) -> {
             int yearCompare = Integer.compare(c1.getYear(), c2.getYear());
             if (yearCompare != 0) {
-                return yearCompare; // за зростанням року
+                return yearCompare; // in ascending order of year
             } else {
-                return -Double.compare(c1.getPrice(), c2.getPrice()); // за спаданням ціни
+                return -Double.compare(c1.getPrice(), c2.getPrice()); // in descending order of price
             }
         });
 
-        // Вивід відсортованого масиву
-        System.out.println("Відсортований масив автомобілів:");
+        // Output the sorted array
+        System.out.println("Sorted array of cars:");
         for (Car car : cars) {
             System.out.println(car);
         }
 
-        // Пошук конкретного автомобіля (об'єкта) в масиві
+        // Searching for a specific car (object) in an array
         Car searchCar = new Car("Ford", "Focus", 2018, 18000, 40000);
         boolean found = false;
         for (Car car : cars) {
             if (car.equals(searchCar)) {
                 found = true;
-                System.out.println("\nЗнайдено об’єкт: " + car);
+                System.out.println("\nObject found: " + car);
                 break;
             }
         }
         if (!found) {
-            System.out.println("\nОб’єкт не знайдено в масиві.");
+            System.out.println("\nObject not found in array.");
         }
     }
 }
