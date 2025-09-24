@@ -4,11 +4,11 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout main branch
         uses: actions/checkout@v3
@@ -19,7 +19,7 @@ jobs:
         run: |
           rm -rf tmp/site
           mkdir -p tmp/site
-          javadoc -d tmp/site -sourcepath src -subpackages lab3
+          javadoc -d tmp/site -sourcepath src -subpackages lab3 || true
 
       - name: Deploy Javadoc to gh-pages
         env:
@@ -34,7 +34,7 @@ jobs:
 
           rm -rf lab3ghp
           mkdir -p lab3ghp
-          
+
           if [ -d ../tmp/site/lab3 ]; then
             cp -r ../tmp/site/lab3/* ./lab3ghp/
           else
