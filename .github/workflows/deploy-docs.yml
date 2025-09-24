@@ -27,7 +27,7 @@ jobs:
           cd gh-pages
 
           rm -rf lab3
-          cp -r ../tmp/lab3 .
+          cp -r ../tmp/lab3 ./lab3
           touch lab3/.nojekyll
 
           git add lab3
