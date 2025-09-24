@@ -16,25 +16,36 @@ jobs:
           fetch-depth: 0
 
       - name: Generate Javadoc
-        run: javadoc -d src/lab3/docs src/lab3/*.java
+        run: |
+          rm -rf tmp/site
+          mkdir -p tmp/site
+          javadoc -d tmp/site src/lab3/*.java
 
       - name: Deploy Javadoc to gh-pages
+        env:
+          REPO: ${{ github.repository }}
         run: |
-          mkdir -p tmp/lab3  
-          cp -r src/lab3/docs/* tmp/lab3/
-
-          git clone --branch gh-pages https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }} gh-pages
+          git clone --branch gh-pages https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ env.REPO }} gh-pages
           cd gh-pages
 
+          git rm -r --ignore-unmatch lab3 || true
+          git rm -r --ignore-unmatch src || true
+
           rm -rf lab3
-          rm -rf src
-          
           mkdir -p lab3
-          cp -r ../tmp/lab3/* ./lab3/
+          cp -r ../tmp/site/* ./lab3/
+
           touch lab3/.nojekyll
 
-          git add lab3 .nojekyll
+          echo "=== gh-pages root ==="
+          ls -la
+          echo "=== lab3 content ==="
+          ls -la lab3 || true
+          echo "=== tmp/site content (should contain index.html) ==="
+          ls -la ../tmp/site || true
+
+          git add -A
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git commit -m "docs: update lab3 Javadoc"
+          git commit -m "docs: update lab3 Javadoc" || echo "no changes to commit"
           git push origin gh-pages --force
