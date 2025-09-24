@@ -25,7 +25,7 @@ public class Lab3 {
         };
 
         // Sort the array: first by year in ascending order,
-        // if the years are equal — by price in descending order
+        // if the years are equal (the same) — by price in descending order
         Arrays.sort(cars, (c1, c2) -> {
             int yearCompare = Integer.compare(c1.getYear(), c2.getYear());
             if (yearCompare != 0) {
