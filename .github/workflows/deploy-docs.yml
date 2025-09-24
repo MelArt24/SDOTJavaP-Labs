@@ -19,7 +19,7 @@ jobs:
         run: |
           rm -rf tmp/site
           mkdir -p tmp/site
-          javadoc -d tmp/site src/lab3/*.java
+          javadoc -d tmp/site -sourcepath src -subpackages lab3
 
       - name: Deploy Javadoc to gh-pages
         env:
