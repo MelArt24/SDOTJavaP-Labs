@@ -1,4 +1,4 @@
-name: Deploy Javadoc
+name: Deploy lab3 Javadoc
 
 on:
   push:
@@ -15,12 +15,15 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Copy Javadoc to gh-pages
+      - name: Generate Javadoc
+        run: javadoc -d src/lab3/docs src/lab3/*.java
+
+      - name: Deploy Javadoc to gh-pages
         run: |
           mkdir tmp
           cp -r src/lab3/docs tmp/lab3
 
-          git clone --branch gh-pages https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} gh-pages
+          git clone --branch gh-pages https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }} gh-pages
           cd gh-pages
 
           rm -rf lab3
