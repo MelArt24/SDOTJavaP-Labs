@@ -1,0 +1,32 @@
+name: Deploy Javadoc
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Copy Javadoc to gh-pages
+        run: |
+          mkdir tmp
+          cp -r src/lab3/docs tmp/lab3
+
+          git clone --branch gh-pages https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} gh-pages
+          cd gh-pages
+
+          rm -rf lab3
+          cp -r ../tmp/lab3 .
+          touch lab3/.nojekyll
+
+          git add lab3
+          git commit -m "docs: update lab3 Javadoc"
+          git push origin gh-pages --force
