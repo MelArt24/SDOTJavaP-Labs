@@ -27,10 +27,13 @@ jobs:
           cd gh-pages
 
           rm -rf lab3
-          cp -r ../tmp/lab3 ./lab3
+          rm -rf src
+          
+          mkdir -p lab3
+          cp -r ../tmp/lab3/* ./lab3/
           touch lab3/.nojekyll
 
-          git add lab3
+          git add lab3 .nojekyll
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git commit -m "docs: update lab3 Javadoc"
