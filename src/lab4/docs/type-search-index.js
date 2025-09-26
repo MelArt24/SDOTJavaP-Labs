@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"lab4","l":"Lab4"},{"p":"lab4","l":"Letter"},{"p":"lab4","l":"Punctuation"},{"p":"lab4","l":"Sentence"},{"p":"lab4","l":"Text"},{"p":"lab4","l":"Word"}];updateSearchResults();
