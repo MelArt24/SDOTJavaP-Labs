@@ -1,5 +1,9 @@
 package lab5;
 
+/**
+ * Entry point of the application.
+ * Demonstrates adding, sorting, and searching toys in the playroom.
+ */
 public class Lab5 {
     public static void main(String[] args) {
         PlayRoom room = new PlayRoom();
