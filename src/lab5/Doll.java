@@ -23,8 +23,6 @@ public class Doll extends Toy<String> {
         this.material = material;
     }
 
-    public String getMaterial() { return material; }
-
     @Override
     public String toString() {
         return super.toString() + ", Material: " + material;
