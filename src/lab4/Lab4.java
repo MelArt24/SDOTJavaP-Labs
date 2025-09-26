@@ -2,7 +2,18 @@ package lab4;
 
 import java.util.*;
 
+/**
+ * The main class of the program.
+ * Reads text, performs validation, builds the structure of the text
+ * (sentences, words, letters, punctuation marks), and then sorts the words
+ * by the number of occurrences of the given letter.
+ */
 public class Lab4 {
+    /**
+     * The main method of the program.
+     *
+     * @param args command line arguments (not used)
+     */
     public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
             System.out.println("Введіть слова через пробіл (лише літери):");

@@ -3,9 +3,22 @@ package lab4;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The {@code Sentence} class represents a sentence.
+ *
+ * @author MelArt24
+ * @version 1.0
+ * @since 2025-09-26
+ */
 public class Sentence {
+    /** Sentence elements: words or punctuation */
     private List<Object> elements = new ArrayList<>();
 
+    /**
+     * A constructor that parses a string of text into words and punctuation marks.
+     *
+     * @param text sentence text
+     */
     public Sentence(String text) {
         StringBuilder currentWord = new StringBuilder();
 
@@ -31,6 +44,11 @@ public class Sentence {
         }
     }
 
+    /**
+     * Gets a list of all words in a sentence.
+     *
+     * @return list of Word objects
+     */
     public List<Word> getWords() {
         List<Word> words = new ArrayList<>();
         for (Object e : elements) {
