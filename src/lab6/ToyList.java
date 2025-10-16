@@ -338,7 +338,7 @@ public class ToyList<T> implements List<Toy<T>> {
      * @param index index at which to insert the first element
      * @param c     the collection containing elements to be inserted
      * @return {@code true} if the list changed as a result, {@code false} otherwise
-     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index > size)
+     * @throws IndexOutOfBoundsException if the index is out of range (index &lt; 0 || index &gt; size)
      */
     @SuppressWarnings("unchecked")
     @Override

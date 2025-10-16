@@ -1,10 +1,12 @@
-package lab6;
+package lab6.tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.Collections;
 
+import lab6.Toy;
+import lab6.ToyList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
